@@ -967,6 +967,10 @@ img {
   border-radius: 12px;
 }
 
+.article-content img + img {
+  margin-top: 24px;
+}
+
 .article-content table {
   display: block;
   max-width: 100%;
