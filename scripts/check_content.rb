@@ -33,4 +33,6 @@ end
   abort "#{page} 没有读取 #{category} 文章" unless File.read(page).include?(expected)
 end
 
+abort "文章正文不能整体使用 data-reveal，否则长文章可能永远不可见" if File.read("_layouts/post.html").match?(/class="article-content"[^>]*\bdata-reveal\b/)
+
 puts "Markdown 内容检查通过（#{files.size} 个文件）"
