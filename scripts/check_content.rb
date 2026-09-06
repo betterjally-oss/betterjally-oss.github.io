@@ -16,6 +16,12 @@ files.each do |path|
   missing = %w[layout title date category].reject { |key| data[key] }
   abort "缺少 #{missing.join(', ')}：#{path}" unless missing.empty?
   abort "分类必须是 blog、slides 或 life：#{path}" unless allowed_categories.include?(data["category"])
+
+  source.scan(/!\[([^\]]*)\]\(<([^>]+)>\)/).each do |alt, url|
+    abort "图片缺少说明文字：#{path}" if alt.strip.empty?
+    image_path = url.delete_prefix("/")
+    abort "找不到图片 #{url}：#{path}" unless File.file?(image_path)
+  end
 end
 
 Dir["_posts/*.md"].each do |path|
