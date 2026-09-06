@@ -98,34 +98,6 @@
       </div>
     </section>
 
-    <!-- 博客 -->
-    <section class="section" id="blog">
-      <div class="container">
-        <h2 class="section-title" data-reveal>博客<span class="dot">.</span></h2>
-        {% assign latest_blog = site.categories.blog | first %}
-        {% if latest_blog %}
-          <article class="project-card blog-card" data-reveal>
-            <div class="project-icon">📝</div>
-            <h3>{{ latest_blog.title | escape }}</h3>
-            <time class="content-date" datetime="{{ latest_blog.date | date_to_xmlschema }}">{{ latest_blog.date | date: "%Y-%m-%d" }}</time>
-            <p>{{ latest_blog.summary | default: latest_blog.excerpt | strip_html | truncate: 120 | escape }}</p>
-            {% if latest_blog.tags and latest_blog.tags != empty %}
-              <div class="project-tags">
-                {% for tag in latest_blog.tags %}<span>{{ tag | escape }}</span>{% endfor %}
-              </div>
-            {% endif %}
-            {% if latest_blog.external_url %}
-              <a href="{{ latest_blog.external_url }}" target="_blank" rel="noopener" class="project-link">{{ latest_blog.button_text | default: "阅读全文 →" }}</a>
-            {% else %}
-              <a href="{{ latest_blog.url | relative_url }}" class="project-link">{{ latest_blog.button_text | default: "阅读全文 →" }}</a>
-            {% endif %}
-          </article>
-        {% else %}
-          <div class="content-empty" data-reveal><h3>暂无博客文章</h3></div>
-        {% endif %}
-      </div>
-    </section>
-
     <!-- 联系 -->
     <section class="section section-alt" id="contact">
       <div class="container contact-inner">
