@@ -1,0 +1,35 @@
+{% assign entries = site.categories[include.category] %}
+{% if entries and entries != empty %}
+  <div class="content-list">
+    {% for post in entries %}
+      <article class="content-entry" data-reveal>
+        <div class="content-entry-cover" aria-hidden="true">
+          <span>{{ post.cover_label | default: post.category | escape }}</span>
+          <strong>{{ post.cover_title | default: "ARTICLE" | escape }}</strong>
+        </div>
+        <div class="content-entry-body">
+          <h2>{{ post.title | escape }}</h2>
+          <time class="content-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+          <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 120 | escape }}</p>
+          {% if post.tags and post.tags != empty %}
+            <ul class="content-tags" aria-label="文章标签">
+              {% for tag in post.tags %}<li>{{ tag | escape }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+          {% if post.external_url %}
+            <a href="{{ post.external_url }}" target="_blank" rel="noopener" class="project-link">{{ post.button_text | default: "阅读全文 →" }}</a>
+          {% else %}
+            <a href="{{ post.url | relative_url }}" class="project-link">{{ post.button_text | default: "阅读全文 →" }}</a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="content-list">
+    <div class="content-empty" data-reveal>
+      <h2>{{ include.empty_title | escape }}</h2>
+      <p>{{ include.empty_text | escape }}</p>
+    </div>
+  </div>
+{% endif %}

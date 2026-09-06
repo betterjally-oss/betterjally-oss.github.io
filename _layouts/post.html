@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title | escape }} · 刘佳磊</title>
+  <meta name="description" content="{{ page.summary | default: page.excerpt | strip_html | escape }}" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='68' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>JL</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}" />
+</head>
+<body>
+  {% assign section = page.category | default: "blog" %}
+  {% if section == "slides" %}
+    {% assign back_url = "/slides.html" %}{% assign back_label = "幻灯片" %}
+  {% elsif section == "life" %}
+    {% assign back_url = "/life.html" %}{% assign back_label = "生活" %}
+  {% else %}
+    {% assign back_url = "/blog.html" %}{% assign back_label = "博客" %}
+  {% endif %}
+
+  <header class="site-header" id="site-header">
+    <nav class="nav container">
+      <a href="{{ '/index.html' | relative_url }}" class="logo">
+        <span class="logo-mark">刘</span><span class="logo-suffix">佳磊</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="{{ '/index.html' | relative_url }}">首页</a></li>
+        <li><a href="{{ '/blog.html' | relative_url }}"{% if section == "blog" %} class="active" aria-current="page"{% endif %}>博客</a></li>
+        <li><a href="{{ '/slides.html' | relative_url }}"{% if section == "slides" %} class="active" aria-current="page"{% endif %}>幻灯片</a></li>
+        <li><a href="{{ '/projects.html' | relative_url }}">项目</a></li>
+        <li><a href="{{ '/life.html' | relative_url }}"{% if section == "life" %} class="active" aria-current="page"{% endif %}>生活</a></li>
+        <li><a href="{{ '/about.html' | relative_url }}">关于</a></li>
+        <li><a href="https://github.com/betterjally-oss" target="_blank" rel="noopener" class="nav-ext" title="GitHub 个人主页">Github</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="切换主题" title="切换深浅色主题">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="section content-page article-page">
+      <div class="container article-container">
+        <header class="article-header" data-reveal>
+          <a href="{{ back_url | relative_url }}" class="article-back">← 返回{{ back_label }}</a>
+          <h1>{{ page.title | escape }}</h1>
+          <div class="article-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+            {% for tag in page.tags %}<span>{{ tag | escape }}</span>{% endfor %}
+          </div>
+          {% if page.summary %}<p class="article-summary">{{ page.summary | escape }}</p>{% endif %}
+        </header>
+        <div class="article-content" data-reveal>{{ content }}</div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="{{ '/index.html' | relative_url }}" class="logo logo-sm">
+        <span class="logo-mark">刘</span><span class="logo-suffix">佳磊</span>
+      </a>
+      <p>© <span id="year"></span> 刘佳磊 · 用 AI 产品改变世界</p>
+      <p class="footer-domain">betterjally@gmail.com</p>
+    </div>
+  </footer>
+
+  <script src="{{ '/js/main.js' | relative_url }}"></script>
+</body>
+</html>

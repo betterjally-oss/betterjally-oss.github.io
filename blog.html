@@ -1,0 +1,67 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>博客 · 刘佳磊</title>
+  <meta name="description" content="刘佳磊的博客，记录 AI 产品、智能体与创作实践。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='68' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>JL</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">刘</span><span class="logo-suffix">佳磊</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="blog.html" class="active" aria-current="page">博客</a></li>
+        <li><a href="slides.html">幻灯片</a></li>
+        <li><a href="projects.html">项目</a></li>
+        <li><a href="life.html">生活</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="https://github.com/betterjally-oss" target="_blank" rel="noopener" class="nav-ext" title="GitHub 个人主页">Github</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="切换主题" title="切换深浅色主题">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section content-page">
+      <div class="container">
+        <header class="content-page-header" data-reveal>
+          <h1 class="section-title">博客<span class="dot">.</span></h1>
+          <p>记录我对 AI 产品、智能体与创作实践的思考。</p>
+        </header>
+
+        {% include content-list.html category="blog" empty_title="暂无博客文章" empty_text="发布后会按时间倒序显示在这里。" %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo logo-sm">
+        <span class="logo-mark">刘</span><span class="logo-suffix">佳磊</span>
+      </a>
+      <p>© <span id="year"></span> 刘佳磊 · 用 AI 产品改变世界</p>
+      <p class="footer-domain">betterjally@gmail.com</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

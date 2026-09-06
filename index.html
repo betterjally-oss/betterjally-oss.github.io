@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -22,11 +24,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">首页</a></li>
+        <li><a href="index.html" class="active" aria-current="page">首页</a></li>
+        <li><a href="blog.html">博客</a></li>
+        <li><a href="slides.html">幻灯片</a></li>
+        <li><a href="projects.html">项目</a></li>
+        <li><a href="life.html">生活</a></li>
         <li><a href="about.html">关于</a></li>
-        <li><a href="#projects">项目</a></li>
-        <li><a href="#contact">联系</a></li>
-        <li><a href="https://github.com/betterjally-oss" target="_blank" rel="noopener" class="nav-ext" title="GitHub 个人主页">GitHub ↗</a></li>
+        <li><a href="https://github.com/betterjally-oss" target="_blank" rel="noopener" class="nav-ext" title="GitHub 个人主页">Github</a></li>
         <li>
           <button class="theme-toggle" id="theme-toggle" aria-label="切换主题" title="切换深浅色主题">
             <span class="theme-icon">🌙</span>
@@ -50,71 +54,19 @@
           从用户洞察到 Agent 工作流落地 —— 关注 AI 应用 / 对话式交互 / 效率工具，持续学习，持续输出。
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">查看项目</a>
           <a href="#contact" class="btn btn-ghost">联系我</a>
         </div>
       </div>
-      <a href="#about" class="scroll-hint" aria-label="向下滚动">
+      <a href="#projects" class="scroll-hint" aria-label="向下滚动">
         <span class="mouse"><span class="wheel"></span></span>
       </a>
-    </section>
-
-    <!-- 关于 -->
-    <section class="section" id="about">
-      <div class="container">
-        <h2 class="section-title" data-reveal>关于我<span class="dot">.</span></h2>
-        <div class="about-grid">
-          <div class="about-text" data-reveal>
-            <div class="about-body" id="about-body">
-              <p>
-                你好！我是 <strong>刘佳磊</strong>，一名 AI 产品经理。我相信 AI 不是炫技，而是生产力——
-                我的工作就是把它的能力变成普通人能真正用起来的产品：定义需求、设计交互、搭建 Agent 工作流、验证价值闭环。
-              </p>
-              <p>
-                我擅长把模糊的想法拆解成清晰的需求，再让大模型能力落地成可交付的解决方案。
-                我相信「<em>好的 AI 产品是会说话的</em>」，每一个产品都是一次与世界的对话。
-                工作之外，我喜欢跑步、摄影和折腾各种效率工具。
-              </p>
-              <ul class="about-list">
-                <li>📍 坐标：中国</li>
-                <li>🎯 兴趣：AI 应用 · Agent · 产品设计</li>
-              </ul>
-            </div>
-            <button class="about-more" id="about-more" type="button" hidden>阅读全文 ↓</button>
-            <a href="about.html" class="btn btn-ghost btn-ghost-accent">了解更多 →</a>
-          </div>
-          <div class="about-card" data-reveal>
-            <div class="stat">
-              <span class="stat-num" data-count="5">0</span><span class="stat-plus">+</span>
-              <span class="stat-label">年产品经验</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-count="30">0</span><span class="stat-plus">+</span>
-              <span class="stat-label">完成项目</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
-              <span class="stat-label">AI 应用案例</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- 项目 -->
     <section class="section" id="projects">
       <div class="container">
-        <h2 class="section-title" data-reveal>精选项目<span class="dot">.</span></h2>
+        <h2 class="section-title" data-reveal>项目<span class="dot">.</span></h2>
         <div class="projects-grid">
-          <article class="project-card" data-reveal>
-            <div class="project-icon">📝</div>
-            <h3>Skill 到底是什么？当你的工作方法开始被 AI 复用</h3>
-            <p>从一次小红书写作开始，理解 Skill 如何把个人经验、工作流程和判断标准，变成 AI 可以反复调用的方法。</p>
-            <div class="project-tags">
-              <span>Skill</span><span>AI</span><span>写作</span>
-            </div>
-            <a href="https://mp.weixin.qq.com/s/fwi5RgVCYM9g3mGInstZmQ" target="_blank" rel="noopener" class="project-link">阅读全文 →</a>
-          </article>
           <article class="project-card" data-reveal>
             <div class="project-icon">🚀</div>
             <h3>项目一：效率工具箱</h3>
@@ -143,6 +95,34 @@
             <a href="#" class="project-link">了解更多 →</a>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- 博客 -->
+    <section class="section" id="blog">
+      <div class="container">
+        <h2 class="section-title" data-reveal>博客<span class="dot">.</span></h2>
+        {% assign latest_blog = site.categories.blog | first %}
+        {% if latest_blog %}
+          <article class="project-card blog-card" data-reveal>
+            <div class="project-icon">📝</div>
+            <h3>{{ latest_blog.title | escape }}</h3>
+            <time class="content-date" datetime="{{ latest_blog.date | date_to_xmlschema }}">{{ latest_blog.date | date: "%Y-%m-%d" }}</time>
+            <p>{{ latest_blog.summary | default: latest_blog.excerpt | strip_html | truncate: 120 | escape }}</p>
+            {% if latest_blog.tags and latest_blog.tags != empty %}
+              <div class="project-tags">
+                {% for tag in latest_blog.tags %}<span>{{ tag | escape }}</span>{% endfor %}
+              </div>
+            {% endif %}
+            {% if latest_blog.external_url %}
+              <a href="{{ latest_blog.external_url }}" target="_blank" rel="noopener" class="project-link">{{ latest_blog.button_text | default: "阅读全文 →" }}</a>
+            {% else %}
+              <a href="{{ latest_blog.url | relative_url }}" class="project-link">{{ latest_blog.button_text | default: "阅读全文 →" }}</a>
+            {% endif %}
+          </article>
+        {% else %}
+          <div class="content-empty" data-reveal><h3>暂无博客文章</h3></div>
+        {% endif %}
       </div>
     </section>
 
