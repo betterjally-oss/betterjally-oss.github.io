@@ -17,6 +17,11 @@ files.each do |path|
   abort "缺少 #{missing.join(', ')}：#{path}" unless missing.empty?
   abort "分类必须是 blog、slides 或 life：#{path}" unless allowed_categories.include?(data["category"])
 
+  if data["cover_image"]
+    cover_path = data["cover_image"].delete_prefix("/")
+    abort "找不到封面 #{data['cover_image']}：#{path}" unless File.file?(cover_path)
+  end
+
   source.scan(/!\[([^\]]*)\]\(<([^>]+)>\)/).each do |alt, url|
     abort "图片缺少说明文字：#{path}" if alt.strip.empty?
     image_path = url.delete_prefix("/")
@@ -31,6 +36,14 @@ end
 { "blog.html" => "blog", "slides.html" => "slides", "life.html" => "life" }.each do |page, category|
   expected = "include content-list.html category=\"#{category}\""
   abort "#{page} 没有读取 #{category} 文章" unless File.read(page).include?(expected)
+end
+
+(Dir["*.html"] + Dir["_layouts/*.html"]).each do |path|
+  source = File.read(path)
+  source.scan(/<link rel="stylesheet" href="([^"]*style\.css[^"]*)"/).flatten.each do |href|
+    abort "页面不会处理样式版本：#{path}" unless path.start_with?("_layouts/") || source.start_with?("---\n")
+    abort "样式地址缺少缓存版本：#{path}" unless href.include?("?v=")
+  end
 end
 
 abort "文章正文不能整体使用 data-reveal，否则长文章可能永远不可见" if File.read("_layouts/post.html").match?(/class="article-content"[^>]*\bdata-reveal\b/)
