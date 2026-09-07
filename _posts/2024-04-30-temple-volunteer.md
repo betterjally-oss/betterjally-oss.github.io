@@ -7,6 +7,7 @@ tags: [寺庙, 义工, 生活]
 summary: "七天寺庙义工之行。"
 cover_label: "生活 × 体验"
 cover_title: "TEMPLE"
+cover_image: "/assets/images/life/temple-volunteer/06.jpg"
 ---
 
 ![弥陀殿一角](</assets/images/life/temple-volunteer/01.jpg>)

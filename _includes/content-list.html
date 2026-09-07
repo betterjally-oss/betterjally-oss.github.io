@@ -3,7 +3,8 @@
   <div class="content-list">
     {% for post in entries %}
       <article class="content-entry" data-reveal>
-        <div class="content-entry-cover" aria-hidden="true">
+        <div class="content-entry-cover{% if post.cover_image %} has-image{% endif %}" aria-hidden="true">
+          {% if post.cover_image %}<img src="{{ post.cover_image | relative_url }}" alt="" loading="lazy" decoding="async" />{% endif %}
           <span>{{ post.cover_label | default: post.category | escape }}</span>
           <strong>{{ post.cover_title | default: "ARTICLE" | escape }}</strong>
         </div>

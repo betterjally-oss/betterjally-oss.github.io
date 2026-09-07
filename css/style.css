@@ -791,16 +791,36 @@ img {
 }
 
 .content-entry-cover {
+  position: relative;
   min-height: 224px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   color: #fff;
   background: linear-gradient(145deg, var(--accent), var(--accent-2));
 }
 
+.content-entry-cover.has-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(22, 24, 68, 0.58), transparent 48%, rgba(22, 24, 68, 0.78));
+}
+
+.content-entry-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .content-entry-cover span {
+  position: relative;
+  z-index: 2;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -808,6 +828,8 @@ img {
 }
 
 .content-entry-cover strong {
+  position: relative;
+  z-index: 2;
   font-size: 2rem;
   line-height: 1;
   letter-spacing: -0.03em;
